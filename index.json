@@ -22,6 +22,10 @@
             "type":"text",
             "analyzer": "english"
         },
+        "clean_data":{
+            "type":"text",
+            "analyzer":"english"
+        },
         "bill_summary": {
             "type": "text"
         },
@@ -33,6 +37,9 @@
         },
         "action_date": {
             "type": "date"
+        },
+        "Category": {
+            "type": "keyword"
         },
         "action_text": {
             "type": "text"
