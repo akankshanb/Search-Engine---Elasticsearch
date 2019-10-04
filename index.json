@@ -1,0 +1,42 @@
+{
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0,
+      "index.blocks.read_only_allow_delete": null
+    },
+     "mappings": {
+      "properties": {
+        "bill_id": {
+          "type": "keyword"
+        },
+        "alternate_bill_id": {
+            "type": "keyword"
+          },
+        "bill_name": {
+          "type": "text"
+        },
+        "bill_text_url": {
+          "type": "text"
+        },
+        "body_text": {
+            "type":"text",
+            "analyzer": "english"
+        },
+        "bill_summary": {
+            "type": "text"
+        },
+        "bill_sponsors": {
+          "type": "keyword"
+        },
+        "action_branch": {
+            "type": "keyword"
+        },
+        "action_date": {
+            "type": "date"
+        },
+        "action_text": {
+            "type": "text"
+        }
+        }
+      }
+}
