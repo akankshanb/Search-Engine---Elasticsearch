@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North Carolina Legislation</title>
+    <link rel="stylesheet" type="text/css" href="static/content/site.css">
+    <script src="{{ url_for('static', filename='scripts/modernizr-2.6.2.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/respond.js') }}"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <style>
+        .billid{
+            background: #5cb85c;
+            margin-top: 0px;
+            font-size: 15px;
+            margin-right: -9px;
+            padding:10px;
+        }
+        .billname{
+            margin-left:30px;
+        }
+        .clickable
+        {
+            cursor: pointer;
+        }
+
+        .clickable .glyphicon
+        {
+            background: rgba(0, 0, 0, 0.15);
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px
+        }
+
+        .panelglyph
+        {
+            margin-top: -23px;
+            font-size: 15px;
+            margin-right: -9px;
+        }
+        a.clickable { color: inherit; }
+        a.clickable:hover { text-decoration:none; }
+    </style>
+    <script>
+        $(document).on('click', '.panel-heading span.clickable', function (e) {
+            var $this = $(this);
+            if (!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+            }
+        });
+        $(document).on('click', '.panel div.clickable', function (e) {
+            var $this = $(this);
+            if (!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-minus').addClass('glyphicon-plus');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+            }
+        });
+        $(document).ready(function () {
+            $('.panel-heading span.clickable').click();
+            $('.panel div.clickable').click();
+        });
+
+    </script>
+    <script type="text/javascript">
+            function datetime(time,billid) {
+                eleID = "#billdate".concat(billid);
+                date = new Date(time);
+                $(eleID).select().text(date);
+            }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1><a href="{{ url_for('index') }}">North Carolina Legislation</a></h1>
+        <p>Brought to you by Taxonomy</p>
+    </div>
+</div>
+<section class="search-sec centered" style="padding-left: 50px; margin-top:120px; background:white;">
+    <div class="container">
+        <form action="/results" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                             {{ form.repo_url(class_="form-control search-slt", placeholder="Enter a search text")}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            {{ form.keywords(class_="form-control search-slt")}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            {{ form.key(class_="form-control search-slt")}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="submit" class="btn btn-danger wrn-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% block content %}
+    <div class="container" style="padding:20px;margin-top:-100px;">
+{% if hits%}
+    <span style="margin-top: 30px;margin-bottom: 30px;">
+    Showing top 10 results out of {{num_hits}} hits.
+    </span>
+{% for hit in hits%}
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading clickable" onclick='datetime({{ hit["_source"]["action_date"]}},"{{ hit["_source"]["bill_id"]}}")'>
+                <h3 class="panel-title">
+                    <span class="billid">{{ hit["_source"]["bill_id"]}}</span>
+                    <span class="billname">{{ hit["_source"]["bill_name"]}}</span> </h3>
+                <span class="pull-right panelglyph "><i class="glyphicon glyphicon-minus"></i></span>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <h4>Action Date:</h4> <span id="billdate{{ hit["_source"]["bill_id"]}}"></span>
+                </div>
+                <div>
+                    <h4>Bill Sponsors:</h4> {{ hit["_source"]["bill_sponsors"]}}
+                </div>
+                <div>
+                    <h4>URL:</h4> <a href="{{ hit["_source"]["bill_text_url"]}}">Link</a>
+                </div>
+                <div>
+                    <h4>Text:</h4>
+                    {{ hit["_source"]["body_text"]}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endif %}
+{% if not hits%}
+    <span style="margin-top: 30px;margin-bottom: 30px;">
+    No Results. Try again!
+    </span>
+{% endif %}
+    </div>
+{%endblock%}
+</body>
+</html>

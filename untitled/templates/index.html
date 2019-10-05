@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North Carolina Legislation</title>
+    <link rel="stylesheet" type="text/css" href="static/content/site.css">
+    <script src="{{ url_for('static', filename='scripts/modernizr-2.6.2.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/respond.js') }}"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<body>
+
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1><a href="{{ url_for('index') }}">North Carolina Legislation</a></h1>
+        <p>Brought to you by Taxonomy</p>
+    </div>
+</div>
+{% block content %}
+<section class="search-sec centered" style="padding-left: 70px; margin-top:120px; background:white; margin-bottom: -130px;">
+    <div class="container">
+        <form action="/results" method="post" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                             {{ form.repo_url(class_="form-control search-slt", placeholder="Enter a search text")}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            {{ form.keywords(class_="form-control search-slt")}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            {{ form.key(class_="form-control search-slt")}}
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 p-0">
+                            <button type="submit" class="btn btn-danger wrn-btn">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{%endblock%}
+<section style="padding-left:100px;padding-bottom: 50px;">
+    <iframe src="http://localhost:5601/app/kibana#/dashboard/4a47a040-e6e8-11e9-8620-5bfcfb672cc6?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15y,to:now))&_a=(description:'',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,useMargins:!t),panels:!((embeddableConfig:(),gridData:(h:15,i:'8bdfc6f9-fd3c-44c4-8302-1a5bc00b1c4a',w:24,x:0,y:0),id:'1ff33590-e6e6-11e9-8620-5bfcfb672cc6',panelIndex:'8bdfc6f9-fd3c-44c4-8302-1a5bc00b1c4a',type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:aa309abb-3a71-4c93-a0ba-e0c529ed710b,w:24,x:24,y:0),id:'2ea46e40-e6e8-11e9-8620-5bfcfb672cc6',panelIndex:aa309abb-3a71-4c93-a0ba-e0c529ed710b,type:visualization,version:'7.4.0'),(embeddableConfig:(),gridData:(h:15,i:e5f50994-e6ef-4286-a223-cc89f4697448,w:24,x:0,y:15),id:a5cfc910-e6e8-11e9-8620-5bfcfb672cc6,panelIndex:e5f50994-e6ef-4286-a223-cc89f4697448,type:visualization,version:'7.4.0')),query:(language:kuery,query:''),timeRestore:!f,title:Dashboard,viewMode:view)" height="800" width="1100"></iframe>
+</section>
+</body>
+</html>
