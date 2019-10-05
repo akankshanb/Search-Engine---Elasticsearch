@@ -8,53 +8,53 @@
 </head>
 <body>
     <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-push-2 col-sm-8 col-md-push-3 col-md-6">
-                        <div class="card card-signin my-5">
-                            <div class="card-body">
-                                <form class="form-signin">
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" onclick="displayKeyword()" data-toggle="dropdown">
-                                            Search By...
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Bill ID</a></li>
-                                            <li><a href="#">Sponsor</a></li>
-                                            <li><a href="#">Keyword</a></li>
-                                        </ul>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-push-2 col-sm-8 col-md-push-3 col-md-6">
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <form class="form-signin">
+                                <div class="dropdown">
+                                    <button id ="button1"class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" role="button">
+                                        Search By...
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="dropdown1">
+                                        <li><a href="#" id="1">Bill ID</a></li>
+                                        <li><a href="#" id="2">Sponsor</a></li>
+                                        <li><a href="#" id="3">Keyword</a></li>
+                                    </ul>
 
-                                    </div>
-                                    <div>
-                                        <input type="email" id="inputEmail" class="form-control" placeholder="Keyword:">
-                                    </div>
-                                    <div class="dropdown" style="margin-bottom:auto">
-                                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                            Category...
-                                            <span class="caret"></span>
-                                        </button>
-                                        
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">Education</a></li>
-                                            <li><a href="#">Appropiation</a></li>
-                                            <li><a href="#">Finance</a></li>
-                                            <li><a href="#">Health</a></li>
-                                            <li><a href="#">Agriculture</a></li>
-                                            <li><a href="#">Transportation</a></li>
+                                </div>
+                                <div>
+                                    <input type="email" id="inputEmail" class="form-control" placeholder="Keyword:">
+                                </div>
+                                <div class="dropdown" style="margin-bottom:auto" id="dropdown2">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                        Category...
+                                        <span class="caret"></span>
+                                    </button>
 
-                                        </ul>
-                                    </div>
-                                    <br />
-                                    <button class="btn btn-lg btn-primary btn-block text-uppercase" id="loginButton" type="submit" onclick="location.href='sample2.html'">Submit</button>
-                                    <!-- <hr class="my-4"> -->
-                                </form>
-                            </div>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Education</a></li>
+                                        <li><a href="#">Appropiation</a></li>
+                                        <li><a href="#">Finance</a></li>
+                                        <li><a href="#">Health</a></li>
+                                        <li><a href="#">Agriculture</a></li>
+                                        <li><a href="#">Transportation</a></li>
+
+                                    </ul>
+                                </div>
+                                <br />
+                                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="loginButton" type="submit" onclick="location.href='Contact'">Submit</button>
+                                <!-- <hr class="my-4"> -->
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-                 
+        </div>
+
     </header>
 
     <footer class="border-top footer text-muted">
@@ -62,5 +62,10 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(function () {
+            $('#dropdown1').val('#1').scrollIntoView();
+            });
+    </script>
 </body>
 </html>
