@@ -2,7 +2,19 @@
     "settings": {
       "number_of_shards": 1,
       "number_of_replicas": 0,
-      "index.blocks.read_only_allow_delete": null
+      "index.blocks.read_only_allow_delete": null,
+      "analysis": {
+        "analyzer": {
+          "my_english_analyzer": {
+            "type": "standard",
+            "stopwords": "_english_"
+          },
+          "my_sponsor_analyzer": {
+            "type":      "pattern",
+            "pattern":   ";"
+          }
+        }
+      }
     },
      "mappings": {
       "properties": {
@@ -13,10 +25,12 @@
             "type": "keyword"
           },
         "bill_name": {
-          "type": "text"
+          "type": "text",
+          "analyzer": "my_english_analyzer",
+          "fielddata": true
         },
         "bill_text_url": {
-          "type": "text"
+          "type": "keyword"
         },
         "body_text": {
             "type":"text",
@@ -24,13 +38,16 @@
         },
         "clean_data":{
             "type":"text",
-            "analyzer":"english"
+            "analyzer": "my_english_analyzer",
+            "fielddata": true
         },
         "bill_summary": {
             "type": "text"
         },
         "bill_sponsors": {
-          "type": "keyword"
+          "type": "text",
+          "fielddata": true,
+          "analyzer": "my_sponsor_analyzer"
         },
         "action_branch": {
             "type": "keyword"
